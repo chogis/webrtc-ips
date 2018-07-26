@@ -1,0 +1,25 @@
+{
+  "name": "webrtc-ips",
+  "version": "0.1.0",
+  "description": "Get local/public IP address in the browser via WebRTC",
+  "scripts": {
+    "code": "eslint src test",
+    "test": "mocha test/setup.js test/**/*.js",
+    "test-inspect": "npm t -- --inspect",
+    "test-brk": "npm t -- --inspect-brk",
+    "precommit": "lint-staged",
+    "prepush": "npm run code && npm t"
+  },
+  "lint-staged": {
+    "{src,test}/**/*.js": "eslint"
+  },
+  "main": "src/index.js",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.11.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.0",
+    "mocha": "^5.2.0"
+  },
+  "license": "MIT"
+}
