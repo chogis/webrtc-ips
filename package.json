@@ -1,12 +1,13 @@
 {
   "name": "webrtc-ips",
   "version": "0.1.0",
-  "description": "Get local/public IP address in the browser via WebRTC",
+  "description": "Get local IP address via WebRTC in browser environment",
   "scripts": {
     "code": "eslint src test",
-    "test": "mocha test/setup.js test/**/*.js",
-    "test-inspect": "npm t -- --inspect",
-    "test-brk": "npm t -- --inspect-brk",
+    "test": "karma start",
+    "build": "webpack",
+    "build:prod": "webpack --mode=production",
+    "build:demo": "npm run build && cp -f dist/bundle.dev.js demo/",
     "precommit": "lint-staged",
     "prepush": "npm run code && npm t"
   },
@@ -14,12 +15,29 @@
     "{src,test}/**/*.js": "eslint"
   },
   "main": "src/index.js",
+  "dependencies": {
+    "promise-controller": "^0.3.0"
+  },
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.1.2",
     "eslint": "^4.11.0",
+    "eslint-plugin-mocha": "^5.1.0",
     "husky": "^0.14.3",
+    "karma": "^2.0.5",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-safari-launcher": "^1.0.0",
+    "karma-webpack": "^3.0.0",
     "lint-staged": "^6.1.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "regenerator": "^0.13.2",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0"
   },
   "license": "MIT"
 }

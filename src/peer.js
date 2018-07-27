@@ -26,7 +26,10 @@ export default class Peer {
   }
 
   _createRTCConnection() {
-    this._rtcPeerConnection = new RTCPeerConnection({iceServers: []});
+    // Chrome and Firefox works with empty iceServers
+    // Although some examples use [{urls: 'stun:stun.services.mozilla.com'}]
+    const iceServers = [];
+    this._rtcPeerConnection = new RTCPeerConnection({iceServers});
     this._rtcPeerConnection.onicecandidate = ice => this._handleCandidate(ice);
     this._rtcPeerConnection.createDataChannel('');
   }

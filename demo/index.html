@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>WebRTC IPs Demo</title>
+        <script src="bundle.dev.js"></script>
+    </head>
+    <body>
+        <h4>
+            Demo for:
+            <a href="https://github.com/vitalets/webrtc-ips">https://github.com/diafygi/webrtc-ips</a>
+        </h4>
+        <p>
+            This demo secretly makes requests to STUN servers that can log your
+            request. These requests do not show up in developer consoles and
+            cannot be blocked by browser plugins (AdBlock, Ghostery, etc.).
+        </p>
+        <h4>Your IPv4 addresses:</h4>
+        <ul id="ipv4"></ul>
+        <h4>Your IPv6 addresses:</h4>
+        <ul id="ipv6"></ul>
+        <iframe id="iframe" sandbox="allow-same-origin" style="display: none"></iframe>
+        <script>
+            window.WebRTC_IPs.getIPs()
+                .then(ips => ips.forEach(handleIP));
+
+            function handleIP(item) {
+                const id = item.v6 ? 'ipv6' : 'ipv4';
+                const ul = document.getElementById(id);
+                const li = document.createElement('li');
+                li.textContent = item.address;
+                ul.appendChild(li);
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+
+module.exports = function (config) {
+  config.set({
+    frameworks: ['mocha'],
+    reporters: ['mocha'],
+    browsers: [
+      'Chrome',
+      // currently does not work in Safari
+      //'Safari',
+      'Firefox',
+    ],
+    files: [
+      'test/test.js'
+    ],
+    preprocessors: {
+      'src/**/*.js': ['webpack'],
+      'test/**/*.js': ['webpack']
+    },
+    webpack: {
+      mode: 'development',
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['env']
+              }
+            }
+          }
+        ]
+      },
+    },
+    singleRun: true,
+  });
+};

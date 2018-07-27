@@ -1,5 +1,5 @@
 import PromiseController from 'promise-controller';
-import ipRegex from 'ip-regex';
+import {IP_REGEX, IPV6_REGEX} from './ip-regex';
 import Peer from './peer';
 import Timer from './timer';
 
@@ -28,7 +28,7 @@ class Detector {
   }
 
   _handleCandidate(info) {
-    const matches = ipRegex({exact: false}).exec(info);
+    const matches = IP_REGEX.exec(info);
     if (matches) {
       this._push(matches[0]);
     }
@@ -37,7 +37,7 @@ class Detector {
   _push(address) {
     const exists = this._ips.some(ip => ip.address === address);
     if (!exists) {
-      const v6 = ipRegex.v6({exact: true}).test(address);
+      const v6 = IPV6_REGEX.test(address);
       this._ips.push({address, v6});
     }
   }
@@ -49,3 +49,4 @@ class Detector {
 }
 
 export default new Detector();
+
