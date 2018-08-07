@@ -1,6 +1,6 @@
 {
   "name": "webrtc-ips",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Get local IP address via WebRTC in the browser environment",
   "scripts": {
     "code": "eslint src test",
