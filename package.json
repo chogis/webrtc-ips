@@ -2,6 +2,10 @@
   "name": "webrtc-ips",
   "version": "0.1.2",
   "description": "Get local IP address via WebRTC in the browser environment",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vitalets/webrtc-ips.git"
+  },
   "scripts": {
     "code": "eslint src test",
     "test": "karma start",
