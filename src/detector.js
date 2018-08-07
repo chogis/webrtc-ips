@@ -1,9 +1,9 @@
 import PromiseController from 'promise-controller';
-import {IP_REGEX, IPV6_REGEX} from './ip-regex';
+import {IPV4_REGEX, IPV6_REGEX} from './ip-regex';
 import Peer from './peer';
 import Timer from './timer';
 
-const DETECTION_TIME = 1000;
+const DETECTION_TIME = 1500;
 
 class Detector {
   constructor() {
@@ -28,16 +28,18 @@ class Detector {
   }
 
   _handleCandidate(info) {
-    const matches = IP_REGEX.exec(info);
-    if (matches) {
-      this._push(matches[0]);
+    for (let reg of [IPV4_REGEX, IPV6_REGEX]) {
+      const matches = reg.exec(info);
+      if (matches) {
+        this._push(matches[0], reg === IPV6_REGEX);
+        return;
+      }
     }
   }
 
-  _push(address) {
+  _push(address, v6) {
     const exists = this._ips.some(ip => ip.address === address);
     if (!exists) {
-      const v6 = IPV6_REGEX.test(address);
       this._ips.push({address, v6});
     }
   }

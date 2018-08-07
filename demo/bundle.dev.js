@@ -141,7 +141,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var DETECTION_TIME = 1000;
+var DETECTION_TIME = 1500;
 
 var Detector = function () {
   function Detector() {
@@ -182,19 +182,24 @@ var Detector = function () {
   }, {
     key: '_handleCandidate',
     value: function _handleCandidate(info) {
-      var matches = _ipRegex.IP_REGEX.exec(info);
-      if (matches) {
-        this._push(matches[0]);
+      console.log(info);
+      var _arr = [_ipRegex.IPV4_REGEX, _ipRegex.IPV6_REGEX];
+      for (var _i = 0; _i < _arr.length; _i++) {
+        var reg = _arr[_i];
+        var matches = reg.exec(info);
+        if (matches) {
+          this._push(matches[0], reg === _ipRegex.IPV6_REGEX);
+          return;
+        }
       }
     }
   }, {
     key: '_push',
-    value: function _push(address) {
+    value: function _push(address, v6) {
       var exists = this._ips.some(function (ip) {
         return ip.address === address;
       });
       if (!exists) {
-        var v6 = _ipRegex.IPV6_REGEX.test(address);
         this._ips.push({ address: address, v6: v6 });
       }
     }
@@ -245,7 +250,7 @@ function getIPv4() {
     var ip = ips.find(function (ip) {
       return !ip.v6;
     });
-    return ip ? ip.address : null;
+    return ip ? ip.address : '';
   });
 }
 
@@ -254,7 +259,7 @@ function getIPv6() {
     var ip = ips.find(function (ip) {
       return ip.v6;
     });
-    return ip ? ip.address : null;
+    return ip ? ip.address : '';
   });
 }
 
@@ -274,12 +279,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 /**
+ * See: https://stackoverflow.com/questions/53497/regular-expression-that-matches-valid-ipv6-addresses
  * Npm's ip-regex does not work in Firefox (see: https://github.com/sindresorhus/ip-regex/issues/24).
- * So currently use more simple regex.
  */
 
-var IP_REGEX = exports.IP_REGEX = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/;
-var IPV6_REGEX = exports.IPV6_REGEX = /^[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7}$/;
+var IPV4_REGEX = exports.IPV4_REGEX = /((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])/;
+var IPV6_REGEX = exports.IPV6_REGEX = /(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))/;
 
 /***/ }),
 
