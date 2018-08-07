@@ -3,7 +3,7 @@ import {IPV4_REGEX, IPV6_REGEX} from './ip-regex';
 import Peer from './peer';
 import Timer from './timer';
 
-const DETECTION_TIME = 1500;
+const DETECTION_TIME = 1000;
 
 class Detector {
   constructor() {
