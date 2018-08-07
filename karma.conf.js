@@ -5,8 +5,6 @@ module.exports = function (config) {
     reporters: ['mocha'],
     browsers: [
       'Chrome',
-      // currently does not work in Safari
-      //'Safari',
       'Firefox',
     ],
     files: [

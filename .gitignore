@@ -10,3 +10,4 @@ npm-debug.log
 /roadmap.txt
 /dist
 /demo
+/.env
