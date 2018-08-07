@@ -1,7 +1,7 @@
 {
   "name": "webrtc-ips",
   "version": "0.1.0",
-  "description": "Get local IP address via WebRTC in browser environment",
+  "description": "Get local IP address via WebRTC in the browser environment",
   "scripts": {
     "code": "eslint src test",
     "test": "karma start",
@@ -47,5 +47,9 @@
     "webpack": "^4.16.3",
     "webpack-cli": "^3.1.0"
   },
+  "keywords": [
+    "webrtc",
+    "ip"
+  ],
   "license": "MIT"
 }
