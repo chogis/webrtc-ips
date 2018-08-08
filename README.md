@@ -5,7 +5,7 @@
 
 A library to detect your local IP address via WebRTC on the web page.
 
-## Live Demo
+## Live demo
 https://vitalets.github.io/webrtc-ips/demo/
 
 
