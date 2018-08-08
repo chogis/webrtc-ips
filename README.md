@@ -37,5 +37,9 @@ const ipv6 = await getIPv6();
 This is a fork of original [diafygi/webrtc-ips](https://github.com/diafygi/webrtc-ips) project 
 with refactored source code, added tests and published to npm. 
 
+## Related links
+* [WebRTC on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API)
+* [Is WebRTC ready yet?](http://iswebrtcreadyyet.com)
+
 ## License
 MIT
