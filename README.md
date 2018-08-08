@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/webrtc-ips.svg)](https://www.npmjs.com/package/webrtc-ips)
 [![license](https://img.shields.io/npm/l/webrtc-ips.svg)](https://www.npmjs.com/package/webrtc-ips)
 
-This library uses WebRTC to detect your local IP address on the web page.
+A library to detect your local IP address via WebRTC on the web page.
 
 ## Live Demo
 https://vitalets.github.io/webrtc-ips/demo/
