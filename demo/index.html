@@ -14,13 +14,21 @@
             This demo uses WebRTC to detect your local IP addresses.
         </p>
         <h4>Your IPv4 address:</h4>
-        <ul id="ipv4"></ul>
+        <ul id="ipv4">
+            <li>Detecting...</li>
+        </ul>
         <h4>Your IPv6 address:</h4>
-        <ul id="ipv6"></ul>
+        <ul id="ipv6">
+            <li>Detecting...</li>
+        </ul>
         <iframe id="iframe" sandbox="allow-same-origin" style="display: none"></iframe>
         <script>
             window.WebRTC_IPs.getIPs()
-                .then(ips => ips.forEach(handleIP));
+                  .then(ips => {
+                      ['ipv6', 'ipv4'].forEach(clear);
+                      ips.forEach(handleIP);
+                      ['ipv6', 'ipv4'].forEach(finish);
+                  });
 
             function handleIP(item) {
                 const id = item.v6 ? 'ipv6' : 'ipv4';
@@ -28,6 +36,20 @@
                 const li = document.createElement('li');
                 li.textContent = item.address;
                 ul.appendChild(li);
+            }
+
+            function clear(id) {
+                const ul = document.getElementById(id);
+                ul.innerHTML = '';
+            }
+
+            function finish(id) {
+                const ul = document.getElementById(id);
+                if (ul.children.length === 0) {
+                    const li = document.createElement('li');
+                    li.textContent = 'Not found';
+                    ul.appendChild(li);
+                }
             }
         </script>
     </body>

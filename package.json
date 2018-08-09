@@ -8,11 +8,12 @@
   },
   "scripts": {
     "code": "eslint src test",
+    "dev": "npm run build -- --watch",
     "test": "karma start",
     "test-sauce": "karma start karma-sauce.conf.js",
     "build": "webpack",
     "build:prod": "webpack --mode=production",
-    "build:demo": "npm run build && cp -f dist/bundle.dev.js demo/",
+    "build:demo": "npm run build && cp -f dist/bundle.dev.js demo/ && cp -f dist/bundle.dev.js.map demo/",
     "ci": "run-s code test-sauce",
     "prerelease": "run-s code test build:prod",
     "release": "npm version $VER && npm publish && git push --follow-tags --no-verify",
