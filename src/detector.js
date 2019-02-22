@@ -13,10 +13,10 @@ class Detector {
     this._timer = new Timer(null, DETECTION_TIME);
   }
 
-  getIPs() {
+  getIPs(urls) {
     return this._detecting.call(() => {
       this._ips = [];
-      this._peer.open();
+      this._peer.open(urls);
       this._timer.start(() => this._finish());
       this._detecting.promise.catch(() => this._cleanup());
     });
