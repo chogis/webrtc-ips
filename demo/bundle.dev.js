@@ -159,12 +159,12 @@ var Detector = function () {
 
   _createClass(Detector, [{
     key: 'getIPs',
-    value: function getIPs() {
+    value: function getIPs(urls) {
       var _this2 = this;
 
       return this._detecting.call(function () {
         _this2._ips = [];
-        _this2._peer.open();
+        _this2._peer.open(urls);
         _this2._timer.start(function () {
           return _this2._finish();
         });
@@ -241,8 +241,8 @@ var _detector2 = _interopRequireDefault(_detector);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function getIPs() {
-  return _detector2.default.getIPs();
+function getIPs(urls) {
+  return _detector2.default.getIPs(urls);
 }
 
 function getIPv4() {
@@ -321,8 +321,8 @@ var Peer = function () {
 
   _createClass(Peer, [{
     key: 'open',
-    value: function open() {
-      this._createRTCConnection();
+    value: function open(urls) {
+      this._createRTCConnection(urls);
       this._makeStunRequest();
     }
   }, {
@@ -339,12 +339,12 @@ var Peer = function () {
     }
   }, {
     key: '_createRTCConnection',
-    value: function _createRTCConnection() {
+    value: function _createRTCConnection(urls) {
       var _this = this;
 
       // Chrome and Firefox works with empty iceServers
       // Although some examples use [{urls: 'stun:stun.services.mozilla.com'}]
-      var iceServers = [];
+      var iceServers = urls ? [urls] : [];
       this._rtcPeerConnection = new RTCPeerConnection({ iceServers: iceServers });
       this._rtcPeerConnection.onicecandidate = function (ice) {
         return _this._handleCandidate(ice);
