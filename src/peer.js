@@ -9,8 +9,8 @@ export default class Peer {
     this._onCandidate = onCandidate;
   }
 
-  open() {
-    this._createRTCConnection();
+  open(urls) {
+    this._createRTCConnection(urls);
     this._makeStunRequest();
   }
 
@@ -25,10 +25,10 @@ export default class Peer {
     }
   }
 
-  _createRTCConnection() {
+  _createRTCConnection(urls) {
     // Chrome and Firefox works with empty iceServers
     // Although some examples use [{urls: 'stun:stun.services.mozilla.com'}]
-    const iceServers = [];
+    const iceServers = urls ? [urls] : [];
     this._rtcPeerConnection = new RTCPeerConnection({iceServers});
     this._rtcPeerConnection.onicecandidate = ice => this._handleCandidate(ice);
     this._rtcPeerConnection.createDataChannel('');

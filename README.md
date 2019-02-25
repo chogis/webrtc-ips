@@ -21,6 +21,10 @@ import {getIPs, getIPv4, getIPv6} from 'webrtc-ips';
 const ips = await getIPs();
 // => [{address: '95.108.174.12', v6: false}, {address: '2a02:6b8::408:5830:47a6:d045:a9ac', v6: true}]
 
+// You can pass in your custom stun server urls
+const ips = await getIPs({ urls: "stun:stun.stunprotocol.org:3478" });
+// => [{address: '95.108.174.12', v6: false}, {address: '2a02:6b8::408:5830:47a6:d045:a9ac', v6: true}]
+
 const ipv4 = await getIPv4();
 // => '95.108.174.12'
 
@@ -34,8 +38,8 @@ const ipv6 = await getIPv6();
 * Firefox (Windows, OSX, Android)
 
 ## Credits
-This is a fork of original [diafygi/webrtc-ips](https://github.com/diafygi/webrtc-ips) project 
-with refactored source code, added tests and published to npm. 
+This is a fork of original [diafygi/webrtc-ips](https://github.com/diafygi/webrtc-ips) project
+with refactored source code, added tests and published to npm.
 
 ## Related links
 * [WebRTC on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API)

@@ -1,8 +1,8 @@
 
 import detector from './detector';
 
-export function getIPs() {
-  return detector.getIPs();
+export function getIPs(urls) {
+  return detector.getIPs(urls);
 }
 
 export function getIPv4() {
