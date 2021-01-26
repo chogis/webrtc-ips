@@ -28,7 +28,7 @@ class Detector {
   }
 
   _handleCandidate(info) {
-    for (let reg of [IPV4_REGEX, IPV6_REGEX]) {
+    for (let reg of [IPV6_REGEX, IPV4_REGEX]) {
       const matches = reg.exec(info);
       if (matches) {
         this._push(matches[0], reg === IPV6_REGEX);
