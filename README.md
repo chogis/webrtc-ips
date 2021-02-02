@@ -5,9 +5,30 @@
 
 A library to detect your local IP address via WebRTC on the web page.
 
+## Security notes
+All modern browsers now require special flags to allow leaking local IP address.
+
+### Chrome:
+Set `enable-webrtc-hide-local-ips-with-mdns` to `disabled` on `chrome://flags` page.
+
+Or run chrome with arguments:
+`--flag-switches-begin --disable-features=WebRtcHideLocalIpsWithMdns --flag-switches-end`
+
+### Firefox:
+Set `media.peerconnection.ice.obfuscate_host_addresses` to `false` on `about:config` page.
+
+### Safari:
+Set `Disable ICE Candidate Restrictions` in `Developer` menu.
+<details>
+  <summary>Screenshot</summary>
+
+![image](https://user-images.githubusercontent.com/1473072/106584660-800fa080-6557-11eb-96da-74d1a7ca5bb6.png)
+</details>
+
 ## Live demo
 https://vitalets.github.io/webrtc-ips/demo/
 
+> Please ensure that you enabled browser flags from previous section
 
 ## Installation
 ```bash
@@ -32,10 +53,6 @@ const ipv6 = await getIPv6();
 // => '2a02:6b8::408:5830:47a6:d045:a9ac'
 
 ```
-
-## Browser support
-* Chrome (Windows, OSX, Android)
-* Firefox (Windows, OSX, Android)
 
 ## Credits
 This is a fork of original [diafygi/webrtc-ips](https://github.com/diafygi/webrtc-ips) project
