@@ -182,7 +182,7 @@ var Detector = function () {
   }, {
     key: '_handleCandidate',
     value: function _handleCandidate(info) {
-      var _arr = [_ipRegex.IPV4_REGEX, _ipRegex.IPV6_REGEX];
+      var _arr = [_ipRegex.IPV6_REGEX, _ipRegex.IPV4_REGEX];
 
       for (var _i = 0; _i < _arr.length; _i++) {
         var reg = _arr[_i];

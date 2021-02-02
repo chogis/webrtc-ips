@@ -21,14 +21,22 @@
         <ul id="ipv6">
             <li>Detecting...</li>
         </ul>
+        <p>
+          <code id="browser"></code>
+        </p>
         <iframe id="iframe" sandbox="allow-same-origin" style="display: none"></iframe>
         <script>
-            window.WebRTC_IPs.getIPs()
-                  .then(ips => {
-                      ['ipv6', 'ipv4'].forEach(clear);
-                      ips.forEach(handleIP);
-                      ['ipv6', 'ipv4'].forEach(finish);
-                  });
+            showBrowserInfo();
+            detectIPs();
+
+            function detectIPs() {
+              window.WebRTC_IPs.getIPs()
+                .then(ips => {
+                  ['ipv6', 'ipv4'].forEach(clear);
+                  ips.forEach(handleIP);
+                  ['ipv6', 'ipv4'].forEach(finish);
+                });
+            }
 
             function handleIP(item) {
                 const id = item.v6 ? 'ipv6' : 'ipv4';
@@ -50,6 +58,10 @@
                     li.textContent = 'Not found';
                     ul.appendChild(li);
                 }
+            }
+
+            function showBrowserInfo() {
+              document.getElementById('browser').textContent = navigator.userAgent;
             }
         </script>
     </body>
