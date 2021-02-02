@@ -7,5 +7,5 @@ import {getIPs} from '../src';
 it('should get IPs', async () => {
   const ips = await getIPs();
   console.log('ips:', ips);
-  assert.ok(ips.length > 0);
+  assert.isAbove(ips.length, 0);
 });

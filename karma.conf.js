@@ -4,9 +4,25 @@ module.exports = function (config) {
     frameworks: ['mocha'],
     reporters: ['mocha'],
     browsers: [
-      'Chrome',
-      'Firefox',
+      'ChromeWithLocalIPsAllowed',
+      'FirefoxWithLocalIPsAllowed',
     ],
+    customLaunchers: {
+      ChromeWithLocalIPsAllowed: {
+        base: 'Chrome',
+        flags: [
+          '--flag-switches-begin',
+          '--disable-features=WebRtcHideLocalIpsWithMdns',
+          '--flag-switches-end'
+        ]
+      },
+      FirefoxWithLocalIPsAllowed: {
+        base: 'Firefox',
+        prefs: {
+          'media.peerconnection.ice.obfuscate_host_addresses': false
+        }
+      },
+    },
     files: [
       'test/test.js'
     ],
