@@ -1,5 +1,5 @@
 # WebRTC IPs
-[![Build Status](https://travis-ci.org/vitalets/webrtc-ips.svg?branch=master)](https://travis-ci.org/vitalets/webrtc-ips)
+[![Actions Status](https://github.com/vitalets/webrtc-ips/workflows/autotests/badge.svg)](https://github.com/vitalets/webrtc-ips/actions)
 [![npm](https://img.shields.io/npm/v/webrtc-ips.svg)](https://www.npmjs.com/package/webrtc-ips)
 [![license](https://img.shields.io/npm/l/webrtc-ips.svg)](https://www.npmjs.com/package/webrtc-ips)
 
