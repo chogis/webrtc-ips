@@ -11,26 +11,43 @@ module.exports = function (config) {
 
   baseFn(config);
 
+  // enable leaking local IP
+  // see: https://github.com/karma-runner/karma-sauce-launcher/issues/240
+  const chromeOptions = {
+    args: [
+      '--flag-switches-begin',
+      '--disable-features=WebRtcHideLocalIpsWithMdns',
+      '--flag-switches-end'
+    ]
+  };
+
   const customLaunchers = {
     chrome_latest_win10: {
       base: 'SauceLabs',
       browserName: 'Chrome',
       platform: 'Windows 10',
-      version: 'latest'
+      version: 'latest',
+      'goog:chromeOptions': chromeOptions
     },
 
-    firefox_latest_win7: {
+    firefox_latest_win10: {
       base: 'SauceLabs',
       browserName: 'Firefox',
-      platform: 'Windows 7',
-      version: 'latest'
+      platform: 'Windows 10',
+      version: 'latest',
+      'moz:firefoxOptions': {
+        prefs: {
+          'media.peerconnection.ice.obfuscate_host_addresses': false
+        }
+      }
     },
 
     chrome_latest_osx: {
       base: 'SauceLabs',
       browserName: 'Chrome',
       platform: 'macOS 10.13',
-      version: 'latest'
+      version: 'latest',
+      'goog:chromeOptions': chromeOptions
     },
 
     chrome_latest_android: {
@@ -40,19 +57,17 @@ module.exports = function (config) {
       platformName: 'Android',
       platformVersion: '7.0',
       deviceName: 'Samsung Galaxy S7 GoogleAPI Emulator',
+      'goog:chromeOptions': chromeOptions
     },
 
-    // Edge is not supported due to lack of 'createDataChannel' support
-    // See: https://wpdev.uservoice.com/forums/257854-microsoft-edge-developer/suggestions/17929639-rtc-data-channels
-    // edge_win10: {
-    //   base: 'SauceLabs',
-    //   browserName: 'MicrosoftEdge',
-    //   platform: 'Windows 10',
-    //   version: '17'
-    // },
+    edge_latest_win10: {
+      base: 'SauceLabs',
+      browserName: 'MicrosoftEdge',
+      platform: 'Windows 10',
+      version: 'latest',
+      'ms:edgeOptions': chromeOptions
+    },
 
-    // Safari does not support WebRTC at all :(
-    // See: http://iswebrtcreadyyet.com
   };
 
   config.set({
